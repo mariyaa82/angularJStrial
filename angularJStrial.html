@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html ng-app="testApp">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="bootstrap-theme.min.css">
+<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+	<script type="text/javascript" src="angular.min.js"></script>
+	<script type="text/javascript" src="testApp.js"></script>
+	<div class="container">
+		<section ng-controller="TabController as tab">
+		<ul class="nav nav-pills">
+			<li ng-class="{ active:tab.isSet(1) }">
+			<a href="" ng-click="tab.setTab(1)">Menu 1</a>
+			</li>
+			<li ng-class="{ active:tab.isSet(2) }">
+			<a href="" ng-click="tab.setTab(2)">Menu 2</a>
+			</li>
+			<li ng-class="{ active:tab.isSet(3) }">
+			<a href="" ng-click="tab.setTab(3)">Menu 3</a>
+			</li>
+		</ul>
+		<div ng-show="tab.isSet(1)" ng-controller="TableController as table">
+			<table class="table table-striped table-hover" >
+				<thead>
+					<tr>
+						<th ng-click="sort('firstName')">Firstname  
+						<span class="glyphicon sort-icon" ng-show="sortKey=='firstName'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+						<th ng-click="sort('surname')">Lastname</th>
+						<th ng-click="sort('email')">Email</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="person in persons | orderBy:sortKey:reverse">
+						<td>{{person.firstName}}</td>
+						<td>{{person.surname}}</td>
+						<td>{{person.email}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	<div ng-show="tab.isSet(2)">
+		<h4>Menu 2</h4>
+	</div>
+	<div ng-show="tab.isSet(3)">
+		<h4>Menu 3</h4>
+	</div>
+	</section>
+</div>
+</body>
+</html>
